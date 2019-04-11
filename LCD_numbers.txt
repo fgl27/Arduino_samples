@@ -1,0 +1,274 @@
+number 0
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+end 
+
+number 1
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 1
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+end 
+
+number 2
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 0
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+end
+
+number 3
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+end
+
+number 4
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 1
+data pin 28
+value 0
+pulse
+end
+
+number 5
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 1
+data pin 26
+value 0
+data pin 27
+value 1
+data pin 28
+value 0
+pulse
+end
+
+number 6
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 0
+data pin 26
+value 1
+data pin 27
+value 1
+data pin 28
+value 0
+pulse
+end
+
+number 7
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 1
+data pin 28
+value 0
+pulse
+end
+
+number 8
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 1
+pulse
+end
+
+number 9
+data pin 25
+value 1
+data pin 26
+value 1
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+data pin 25
+value 1
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 1
+pulse
+end
+
+move caracter 14
+
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 1
+data pin 28
+value 1
+pulse
+data pin 25
+value 0
+data pin 26
+value 1
+data pin 27
+value 1
+data pin 28
+value 1
+pulse
+
+move caracter 1 
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 1
+data pin 28
+value 1
+pulse
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+
+
+Troca linha 0 pra 1
+
+data pin 25
+value 0
+data pin 26
+value 0
+data pin 27
+value 1
+data pin 28
+value 1
+pulse
+data pin 25
+value 1
+data pin 26
+value 0
+data pin 27
+value 0
+data pin 28
+value 0
+pulse
+
+

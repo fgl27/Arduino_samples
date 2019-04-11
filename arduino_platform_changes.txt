@@ -1,0 +1,5 @@
+Toolchanig download from https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+replace after extrac to 4.8.3-2014q1
+
+-lm -gcc to -lm -g
+-Os to -O2
