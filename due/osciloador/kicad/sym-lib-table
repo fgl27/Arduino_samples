@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name buck-rescue)(type Legacy)(uri ${KIPRJMOD}/buck-rescue.lib)(options "")(descr ""))
+  (lib (name buck_gnd-rescue)(type Legacy)(uri ${KIPRJMOD}/buck_gnd-rescue.lib)(options "")(descr ""))
+  (lib (name buck_vcc_sync-rescue)(type Legacy)(uri ${KIPRJMOD}/buck_vcc_sync-rescue.lib)(options "")(descr ""))
+  (lib (name oscila_mag-rescue)(type Legacy)(uri ${KIPRJMOD}/oscila_mag-rescue.lib)(options "")(descr ""))
+)
