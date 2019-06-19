@@ -1,3 +1,4 @@
+// Radar por laço indutivo usando arduino ou or Inductive-loop detectors using arduino
 #define PERIODO 1680 // 84 Mhz / 1680 = 50 Khz
 #define DUTY PERIODO / 2 // 50% duty
 #define VReferencia 2900 // Tensão referencia, se baixar desta muda o esstado do led
@@ -11,8 +12,8 @@ unsigned long tempo_final;
 float tempo;
 
 // Calculo das velocidades
-float VM;
-float VC;
+float VM; // Velocidae medida
+int VC; // Velocidade considerada, é ajustada e arredondada
 
 // Verifica tempo inicial? true sim, false não
 static bool check_inicio = true;
@@ -88,23 +89,23 @@ void loop() {
       VM = (float)(distancia / tempo);
       // Art. 218 CTB Tabela II
       // até 100 km/h, a tolerância é de 7km/h.
-      // Se a velocidade do veículo estiver acima de 100 km/h, o “desconto” do radar móvel é de 7%.
+      // Se a velocidade do veículo estiver acima de 100 km/h, o “desconto” do radar é de 7%.
       // Observações:
       // 1.VM - VELOCIDADE MEDIDA (Km/h) VC - VELOCIDADE CONSIDERADA (Km/h)
       // 2. Para velocidades medidas superiores aos indicados na tabela, considerar o erro máximo
       // admissível de 7%, com arredondamento matemático para se calcular a velocidade considerada.
 
       // Conforme tabela II função round(valor) arredonda pra mais caso a casa decimal for >= 0.5 o contrario para menos
-      if (VM > 100) VC = round(VM * 0.93); // acima de 100 km/h
-      else if (VM > 7) VC = round(VM - 7); // abaixo de 100 km/h
-      else VC = 0; // acima de 7 km/h
+      if (VM > 100) VC = round(VM * 0.93); // acima de 100 km/h, tolerancia de 7 %
+      else if (VM > 7) VC = round(VM - 7); // abaixo de 100 km/h e acima de 7 km/h, tolerancia de 7 km/h
+      else VC = 0; // abaixo de 7 km/h zero
       
       // Printa o resultado 1 segundo ou 1.000.000 de microsegundos deve resultar em um VM = 1.08 km/h
       Serial.print("VM = ");
       Serial.print(VM, 2);
-      Serial.print(" km/h | VC = ");
+      Serial.print("\tkm/h\t| VC = ");
       Serial.print(VC);
-      Serial.println(" km/h");
+      Serial.println("\tkm/h");
     }
   }
 
