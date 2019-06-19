@@ -1,13 +1,18 @@
 #define PERIODO 1680 // 84 Mhz / 1680 = 50 Khz
+#define DUTY PERIODO / 2 // 50% duty
 #define VReferencia 2900 // Tensão referencia, se baixar desta muda o esstado do led
 
-#define hora_em_micro 3600000000 // Uma hora em microsegundos
+#define hora_em_micro 3600000000 // Uma hora em microsegundos, pois a leitura de tepo é em micro mas é printado em hora
 #define distancia 0.0003 // 30 cm convertido em Km
 
-// Calculo de contaem do tempo
+// Calculo de contagem do tempo
 unsigned long tempo_inicial;
 unsigned long tempo_final;
 float tempo;
+
+// Calculo das velocidades
+float VM;
+float VC;
 
 // Verifica tempo inicial? true sim, false não
 static bool check_inicio = true;
@@ -27,7 +32,7 @@ void setup () {
 
   PWM->PWM_CH_NUM[4].PWM_CMR =  PWM_CMR_CPRE_CLKA;     // Enable single slope PWM and set the clock source as CLKA
   PWM->PWM_CH_NUM[4].PWM_CPRD = PERIODO;                // Set the PWM period register 84MHz/(PERIOD)= Freq
-  PWM->PWM_CH_NUM[4].PWM_CDTY = PERIODO / 2;            // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
+  PWM->PWM_CH_NUM[4].PWM_CDTY = DUTY;            // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
 
   REG_PWM_ENA = PWM_ENA_CHID7 | PWM_ENA_CHID4; // Enable PWM CH 7 e 4
 
@@ -66,23 +71,39 @@ void ledoff() {
 void loop() {
 
   if (check_inicio) {
-    //while ((ADC->ADC_ISR & ADC_CHER_CH0) == 0); // Espera a conversão
+    while ((ADC->ADC_ISR & ADC_CHER_CH0) == 0); // Espera a conversão
     if (ADC->ADC_CDR[0] < VReferencia) {
       tempo_inicial = micros();
       ledon();
       check_inicio = false;
     }
   } else {
-    //while ((ADC->ADC_ISR & ADC_CHER_CH7) == 0); // Espera a conversão
+    while ((ADC->ADC_ISR & ADC_CHER_CH7) == 0); // Espera a conversão
     if (ADC->ADC_CDR[7] < VReferencia) {
       tempo_final =  micros();
       ledoff();
       check_inicio = true;
 
       tempo = (float)(tempo_final - tempo_inicial) / hora_em_micro;
-      // Printa o resultado 1 segundo ou 1.000.000 de microsegundos deve dar 1.08 km/h
-      Serial.print(" Velocidade = ");
-      Serial.print((float)(distancia / tempo), 2);
+      VM = (float)(distancia / tempo);
+      // Art. 218 CTB Tabela II
+      // até 100 km/h, a tolerância é de 7km/h.
+      // Se a velocidade do veículo estiver acima de 100 km/h, o “desconto” do radar móvel é de 7%.
+      // Observações:
+      // 1.VM - VELOCIDADE MEDIDA (Km/h) VC - VELOCIDADE CONSIDERADA (Km/h)
+      // 2. Para velocidades medidas superiores aos indicados na tabela, considerar o erro máximo
+      // admissível de 7%, com arredondamento matemático para se calcular a velocidade considerada.
+
+      // Conforme tabela II função round(valor) arredonda pra mais caso a casa decimal for >= 0.5 o contrario para menos
+      if (VM > 100) VC = round(VM * 0.93); // acima de 100 km/h
+      else if (VM > 7) VC = round(VM - 7); // abaixo de 100 km/h
+      else VC = 0; // acima de 7 km/h
+      
+      // Printa o resultado 1 segundo ou 1.000.000 de microsegundos deve resultar em um VM = 1.08 km/h
+      Serial.print("VM = ");
+      Serial.print(VM, 2);
+      Serial.print(" km/h | VC = ");
+      Serial.print(VC);
       Serial.println(" km/h");
     }
   }
