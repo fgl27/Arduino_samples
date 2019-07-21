@@ -1,7 +1,8 @@
 // Radar por laço indutivo usando arduino ou or Inductive-loop detectors using arduino
 #define PERIODO 1680 // 84 Mhz / 1680 = 50 Khz
 #define DUTY PERIODO / 2 // 50% duty
-#define VReferencia 2900 // Tensão referencia, se baixar desta muda o esstado do led
+#define VReferencia 3000 // Tensão referencia, se baixar desta muda o esstado do led
+#define VReferencia2 3200
 
 #define hora_em_micro 3600000000 // Uma hora em microsegundos, pois a leitura de tepo é em micro mas é printado em hora
 #define distancia 0.0003 // 30 cm convertido em Km
@@ -80,7 +81,7 @@ void loop() {
     }
   } else {
     while ((ADC->ADC_ISR & ADC_CHER_CH7) == 0); // Espera a conversão
-    if (ADC->ADC_CDR[7] < VReferencia) {
+    if (ADC->ADC_CDR[7] < VReferencia2) {
       tempo_final =  micros();
       ledoff();
       check_inicio = true;
