@@ -1,9 +1,37 @@
-sites
-
 https://www.arduino.cc/en/Hacking/Upgrading16U2Due
+
+Instructions
+To use your Arduino board to burn a bootloader onto an AVR, you need to follow a few simple steps.
+
+1 - Open the ArduinoISP sketch (in Examples) in the Arduino IDE.
+2 - Select the items in the Tools > Board and Serial Port menus that correspond to the board you are using as the programmer (not the board being programmed).
+3 - Upload the ArduinoISP sketch.
+4 - Connect a 10uF (micro Farad a 100 also works so 10 to 100 OK and tested) capacitor between the GND and RESET pin.
+5 - Connect the following pins from the Arduino Uno (or Mega) to the ATmega16U2 ICSP connector:
+
+ 	Uno	Mega	16U2 ICSP
+SCK	13	52	3
+MISO	12	50	1
+MOSI	11	51	4
+Reset	10	10	5
+GND	GND	GND	6
++5V	5V	5V	2
+
+see:
+Due16U2UpgradeSPI.jpg
+
+from the bellow we get the file Arduino-DUE-usbserial-prod-firmware-2013-02-05_resetfix.hex
 
 https://forum.arduino.cc/index.php?topic=167492.msg1373055#msg1373055
 
-cmd
+6 - run the cmd
 
 '/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/bin/avrdude' -C '/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/etc/avrdude.conf' -c arduino -P /dev/ttyUSB0 -b 19200 -p m16u2 -vvv -U flash:w:/home/fgl27/Arduino/due/Arduino-DUE-usbserial-prod-firmware-2013-02-05_resetfix.hex:i
+
+/dev/ttyUSB0 is the uno port check with port is be used by terminal cmd "dmesg"
+'/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/bin/avrdude' path to avrdude from arduino sdk
+'/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/etc/avrdude.conf'  path to avrdude.conf  from arduino sdk
+/home/fgl27/Arduino/due/Arduino-DUE-usbserial-prod-firmware-2013-02-05_resetfix.hex path to the hex file, don't send a wrong file it may never work again
+
+all the rest in the cmd is standard so don't change
+
