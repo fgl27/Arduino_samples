@@ -1,0 +1,9 @@
+sites
+
+https://www.arduino.cc/en/Hacking/Upgrading16U2Due
+
+https://forum.arduino.cc/index.php?topic=167492.msg1373055#msg1373055
+
+cmd
+
+'/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/bin/avrdude' -C '/home/fgl27/Downloads/arduino-1.8.9-linux64/arduino-1.8.9/hardware/tools/avr/etc/avrdude.conf' -c arduino -P /dev/ttyUSB0 -b 19200 -p m16u2 -vvv -U flash:w:/home/fgl27/Arduino/due/Arduino-DUE-usbserial-prod-firmware-2013-02-05_resetfix.hex:i
