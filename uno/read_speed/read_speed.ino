@@ -3,6 +3,9 @@
 
 #define PWM_ANTENA PB3 //Porta 11 arduino
 
+static int numSamples = 0;
+static long t, t0 = 0;
+
 //
 void setup() {
 
@@ -26,10 +29,14 @@ void setup() {
   //Configura PWM
   //TCCR1A |= (0 << WGM11) | (1 << WGM10);            //Fast PWM 8 Bit
   //TCCR1A |= (1 << WGM11) | (0 << WGM10);            //Fast PWM 9 Bit
-  TCCR1A |= (1 << WGM11) | (1 << WGM10);              //Fast PWM 10 Bit
+  
+  //TCCR1A |= (1 << WGM11) | (1 << WGM10);              //Fast PWM 10 Bit muda a comparação para 15.62KHz
+
   TCCR1B = (1 << WGM12);
   TCCR1B |= (0 << CS12) | (0 << CS11) | (1 << CS10);  //Limpa prescaler bits
+
   TCCR1B = TCCR1B |  _BV(CS10); //Freq de Comparação 62.52 KHz
+
   TIMSK1 = (1 << OCIE1A) | (1 << TOIE1);
   sei();//allow interrupts
 
@@ -56,22 +63,8 @@ void setup() {
 //Interrupção de leitura do ADC
 //A cada interrupção o valor do ADC é lido o PWM é habilitado e seta quando a função ISR(TIMER1_COMPA_vect) sera chamada
 ISR(TIMER1_OVF_vect) {
-  //Copia da função analogRead() sem o que não precisa...
-  // we have to read ADCL first; doing so locks both ADCL
-  // and ADCH until ADCH is read.  reading ADCL second would
-  // cause the results of each conversion to be discarded,
-  // as ADCL and ADCH would be locked when it completed.
-  uint8_t low, high;
-  low  = ADCL;
-  high = ADCH;
+        numSamples++;
 
-  //Copia o valor da leitura do ADC para comparador
-  //Quanto maior for a amplitude do sinal lido, mais tempo levara para que a função
-  //ISR(TIMER1_COMPA_vect) seja chamada
-  //Assim gerando a modulação
-  OCR1A = (high << 8) | low;
-  //Habilita o pwm
-  DDRB |= (1 << PWM_ANTENA);
 }
 
 //Interrupção de comparação
@@ -81,4 +74,16 @@ ISR(TIMER1_COMPA_vect) {
 }
 
 void loop() {
+  if (numSamples >= 1000) {
+    t = micros() - t0; // calculate elapsed time
+
+    Serial.print("Sampling frequency: ");
+    Serial.print((float)1000000 / t);
+    Serial.println(" KHz");
+    delay(2000);
+
+    // restart
+    t0 = micros();
+    numSamples = 0;
+  }
 }
