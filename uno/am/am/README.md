@@ -61,10 +61,13 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 
 ![CI](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/uno/am/am/ci_model.png)
 
-O processo de funcionamento deste é o mesmo do microcontrolado, porem visualizando este pode ser mais facil para alguns de entender o processo.
-Assim na imagem acima temos, um sinal de áudio sendo filtrado e elevado, apos temos um comparador a 15,625kHz simulando o processo de comparação e leitura do ADC, e apos temos um sinal PWM e uma porta logica AND simulando assim o processo de habilitar e desabilitar o PWM em relação ao valor lido do ADC, na saída da AND/PWM temos um filtro passa baixa na com frequência de corte igual a do PWM assim é possível ver o resultado esperado da saída do Arduíno usando este simples modelo.
+O processo de funcionamento deste é o mesmo do microcontrolado, porem visualizando este pode ser mais fácil de entender o processo pois é possível modificar e simular varias opções para melhor entender o que esta acontecendo.<br>
 
-O resultado gráfico da saída deste circuito abaixo, como podemos ver é muito próximo do sinal que temos no osciloscópio feito na pratica
+Assim na imagem acima temos, um sinal de áudio sendo filtrado e elevado este então é chamado de mensagem, apos temos um comparador a 15,625kHz simulando o processo de comparação e leitura do ADC, e apos temos um sinal PWM e uma porta logica AND simulando assim o processo de habilitar e desabilitar o PWM em relação ao valor lido do ADC, na saída da AND/PWM temos um filtro passa baixa na com frequência de corte igual a da portadora assim é possível ver o resultado esperado da saída do Arduíno usando este simples modelo.<br>
+
+A multiplicação mostra o resultado ideal da modulação AM, usada aqui para simples visualização e comparação do sinal obtido em relação ao ideal.<br>
+
+O resultado gráfico da saída deste circuito abaixo, como podemos ver é muito próximo do sinal que temos no osciloscópio feito na pratica<br>
 
 ![sem_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/uno/am/am/sem_zoom.png)
 
@@ -72,7 +75,11 @@ Aproximando mostrando o sinal, desde o pico máximo ate o mínimo.
 
 ![com_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/uno/am/am/com_zoom.png)
 
-Como o valor de amostragem de comparação é pequeno 15,625kHz e este é o valor opitimo para que este Arduíno opera como um transmissor AM, o sinal na saída do circuito sobre o filtro não mostra grandes variações de amplitudes, para verificar uma variação maior temos de modificar esta frequência de comparação usando um valor de 8MHz obtemos a forma de onda abaixo, agora é possível ver qual é o efeito causado pelo filtro e o porque este é usado para obter uma modulação mais próxima de um sinal AM comercial, porem mesmo como pode ser visto no video de demostração do funcionamento do projeto esta frequência de comparação não afetou a qualidade da transmissão, o sinal de audio uma musica ficou bem claro com mínimos ruídos.
+Como o valor de amostragem de comparação é pequeno 15,625kHz e este é o valor opitimo para que este Arduíno opera como um transmissor AM, o sinal na saída do circuito sobre o filtro não mostra grandes variações de amplitudes, para verificar uma variação maior temos de modificar esta frequência de comparação usando um valor de 8MHz obtemos a forma de onda abaixo, agora é possível ver qual é o efeito causado pelo filtro e o porque este é usado para obter uma modulação mais próxima de um sinal AM comercial.<br>
+
+Porem mesmo como variações muito pequenas de amplitude quando usando uma frequência de comparação baixa isto não se mostrou um problema na pratica, como  pode ser visto no video de demostração do funcionamento do projeto (no final deste texto o link), esta frequência de comparação não afetou a qualidade da transmissão o sinal de áudio uma musica ficou bem claro com mínimos ruídos.
+
+Gráfico usando uma frequência comparação de 8MHz:
 
 ![sem_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/uno/am/am/sem_zoom2.png)
 
