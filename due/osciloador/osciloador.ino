@@ -29,12 +29,12 @@ void setup () {
   REG_PWM_CLK = PWM_CLK_PREA(0) | PWM_CLK_DIVA(1);     // Set the PWM clock A rate to 84MHz (84MHz/1)
 
   PWM->PWM_CH_NUM[7].PWM_CMR =  PWM_CMR_CPRE_CLKA;     // Enable single slope PWM and set the clock source as CLKA
-  PWM->PWM_CH_NUM[7].PWM_CPRD = PERIODO;                // Set the PWM period register 84MHz/(PERIOD)= Freq
-  PWM->PWM_CH_NUM[7].PWM_CDTY = PERIODO / 2;            // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
+  PWM->PWM_CH_NUM[7].PWM_CPRD = PERIODO;               // Set the PWM period register 84MHz/(PERIOD)= Freq
+  PWM->PWM_CH_NUM[7].PWM_CDTY = PERIODO / 2;           // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
 
   PWM->PWM_CH_NUM[4].PWM_CMR =  PWM_CMR_CPRE_CLKA;     // Enable single slope PWM and set the clock source as CLKA
-  PWM->PWM_CH_NUM[4].PWM_CPRD = PERIODO;                // Set the PWM period register 84MHz/(PERIOD)= Freq
-  PWM->PWM_CH_NUM[4].PWM_CDTY = DUTY;            // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
+  PWM->PWM_CH_NUM[4].PWM_CPRD = PERIODO;               // Set the PWM period register 84MHz/(PERIOD)= Freq
+  PWM->PWM_CH_NUM[4].PWM_CDTY = DUTY;                  // Duty recommended starting at 0 or (Vref/Vin) * PERIOD as the Vin is variable not using here
 
   REG_PWM_ENA = PWM_ENA_CHID7 | PWM_ENA_CHID4; // Enable PWM CH 7 e 4
 
