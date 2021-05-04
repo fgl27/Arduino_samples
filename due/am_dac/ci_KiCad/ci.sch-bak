@@ -1,0 +1,139 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Antenna A1
+U 1 1 605397BD
+P 3950 2950
+F 0 "A1" H 3900 3300 50  0000 L CNN
+F 1 "Antena" H 3850 3150 50  0000 L CNN
+F 2 "" H 3950 2950 50  0001 C CNN
+F 3 "~" H 3950 2950 50  0001 C CNN
+	1    3950 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 6053A6BF
+P 3450 3000
+F 0 "R1" H 3520 3046 50  0000 L CNN
+F 1 "10k Ω" H 3520 2955 50  0000 L CNN
+F 2 "" V 3380 3000 50  0001 C CNN
+F 3 "~" H 3450 3000 50  0001 C CNN
+	1    3450 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L pspice:CAP C1
+U 1 1 6053AEF6
+P 3200 3250
+F 0 "C1" V 3515 3250 50  0000 C CNN
+F 1 "10 μF" V 3424 3250 50  0000 C CNN
+F 2 "" H 3200 3250 50  0001 C CNN
+F 3 "~" H 3200 3250 50  0001 C CNN
+	1    3200 3250
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:AudioJack2 J?
+U 1 1 6053CCAD
+P 2600 3250
+F 0 "J?" V 2678 3120 50  0001 R CNN
+F 1 "Entrada do sinal de áudio" H 2350 3250 50  0000 R CNN
+F 2 "" H 2600 3250 50  0001 C CNN
+F 3 "~" H 2600 3250 50  0001 C CNN
+	1    2600 3250
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 6053E3D1
+P 3450 3450
+F 0 "R2" H 3520 3496 50  0000 L CNN
+F 1 "10k Ω" H 3520 3405 50  0000 L CNN
+F 2 "" V 3380 3450 50  0001 C CNN
+F 3 "~" H 3450 3450 50  0001 C CNN
+	1    3450 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 3150 3450 3250
+Connection ~ 3450 3250
+Wire Wire Line
+	3450 3250 3450 3300
+Wire Wire Line
+	2800 3250 2950 3250
+$Comp
+L power:GNDREF GND
+U 1 1 605473BE
+P 2800 3550
+F 0 "GND" H 2750 3350 50  0000 L CNN
+F 1 "GNDREF" H 2805 3377 50  0001 C CNN
+F 2 "" H 2800 3550 50  0001 C CNN
+F 3 "" H 2800 3550 50  0001 C CNN
+	1    2800 3550
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 3550 2800 3350
+$Comp
+L power:GNDREF GND
+U 1 1 60554C55
+P 3450 2600
+F 0 "GND" H 3400 2400 50  0000 L CNN
+F 1 "GNDREF" H 3455 2427 50  0001 C CNN
+F 2 "" H 3450 2600 50  0001 C CNN
+F 3 "" H 3450 2600 50  0001 C CNN
+	1    3450 2600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3450 2850 3450 2600
+$Comp
+L power:GNDREF GND
+U 1 1 60558CB3
+P 9100 4400
+F 0 "GND" H 9050 4200 50  0000 L CNN
+F 1 "GNDREF" H 9105 4227 50  0001 C CNN
+F 2 "" H 9100 4400 50  0001 C CNN
+F 3 "" H 9100 4400 50  0001 C CNN
+	1    9100 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 4400 9100 4200
+$Comp
+L arduino:Arduino_Due_Shield XA1
+U 1 1 60919093
+P 5600 3700
+F 0 "XA1" H 5600 1319 60  0001 C CNN
+F 1 "Arduino_Due_Shield" H 5600 1319 60  0000 C CNN
+F 2 "" H 6300 6450 60  0001 C CNN
+F 3 "https://store.arduino.cc/arduino-due" H 6300 6450 60  0001 C CNN
+	1    5600 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 3150 4300 3150
+Wire Wire Line
+	3450 3250 4300 3250
+Wire Wire Line
+	4350 5450 4300 5450
+Wire Wire Line
+	3450 5450 3450 3600
+Connection ~ 4300 5450
+Wire Wire Line
+	4300 5450 3450 5450
+$EndSCHEMATC
