@@ -3,6 +3,7 @@
 /*  1.4 MHz DAC output on channel 1 (DAC1) triggered by Timer Counter 0 channel 2 TIOA2               */
 /****************************************************************************************************/
 #define FREQ 700 // Operation Freq, not exactly math some freq will be close but not waht write here, Max freq 807.44 kHz max dac freq
+//sudo chmod a+rw /dev/ttyACM0 
 
 void setup()
 {
