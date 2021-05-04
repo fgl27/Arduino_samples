@@ -126,8 +126,6 @@ O canal 1 do osciloscópio (sinal verde) com amplitude de 1V esta conectado na p
 
 ## Video demostrativos do projeto funcionando num rádio
 
-### Funcionamento geral com uma música
-
 No video abaixo uma breve explicação do funcionamento e como é possível ver a musica fica com uma qualidade de áudio muito boa para AM.
 
 https://drive.google.com/file/d/17hrQJuZCpgOAXti6QjneFEh1lNtxj91E/view?usp=sharing
