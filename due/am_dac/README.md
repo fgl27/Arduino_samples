@@ -1,6 +1,5 @@
 # Transmissor AM usando Arduíno projeto em andamento da faculdade
 
-## Introdução:
 Neste usamos um Arduíno DUE
 
 ![CI](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci.png)
@@ -15,7 +14,7 @@ Neste projeto para modular o sinal foi usado esta mesma técnica mas a portadora
 
 ![am_mod](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/modulado.png)
 
-## Explicação detalhada funcionamento do processo lógico:
+# Explicação detalhada funcionamento do processo lógico:
 
 Assim para gerar esta modulação no microcontrolador temos os seguintes passos [Configuração do Arduíno esta no arquivo am_dac.ino](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/am_dac.ino)
 
@@ -37,9 +36,9 @@ O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um
 
 Como é possível ver o sinal modulado acompanha perfeitamente o sinal da mensagem.
 
-![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ton_1_kHz.png)
+![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz.png)
 
-## Explicação detalhada funcionamento do processo em termos de circuito:
+# Explicação detalhada funcionamento do circuito:
 
 ![CI](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci.png)
 
@@ -52,38 +51,58 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * Assim este sinal filtrado e elevado é conectado na porta **A0** dos ADC
 * Temos um timer configurado a 1.4 MHz
 * O Arduíno então a cada pulso impar do timer zera o DAC, e pulsos pares lê o valor do ADC e seta este valor no DAC
-* E na porta **DAC1** temos a saída o sinal modulado AM
+* E na porta **DAC1** temos a saída o sinal modulado AM porem ainda não filtrado
+* Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 680kHz e um passa baixa frequência de corte 720kHz
+* E na saída do filtro a antena
+
+# Explicação do filtro:
+
+Ao analisarmos o espectro FFT deste sinal vemos que a saída do DAC tem um componente DC muito alto, assim a necessidade de filtramos o sinal tanto para eliminar componentes de frequência indesejadas do sinal quanto para limitarmos a banda do sinal, abaixo temos duas imagens onde é possível ver os ecpectros FFT do DAC e da saída do filtro
+
+FFT DAC:<br>
+
+A frequência 0 (CC), 100, 500 e 600 kHz contribuem bastante para o sinal<br>
+
+![FFT_dac](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_dac.png)
+
+FFT Filtro:<br>
+
+A frequência 0 foi eliminada, a frequência de 500 kHz diminui bastante, a de 100 e 600 kHz nem tanto mas diminuem.<br>
+
+![FFT_filtro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro.png)
 
 # Imagens do circuito montado no Arduíno:
-
-![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_desc.jpg?raw=true)
 
 ![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_0.jpg?raw=true)
 
 ![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_1.jpg?raw=true)
 
-![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_2.jpg?raw=true)
 
 # Resultados de alguns sinais de áudio:
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na porta do DAC, oscilando a uma frequência de 700kHz.<br>
+O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
 
 1kHz https://www.youtube.com/watch?v=3FBijeNg_Gs
 
-![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ton_1_kHz.png)
+![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz.png)
 
-1kHz zoom, para ver como os pulsos ficam bem definidos
+1kHz zoom, aqui o DAC é o vermelho, amarelo saída do filtro
 
-![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ton_1_kHz_zoom.png)
+![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_zoom.png)
+
+Nos demais segue...
+
+O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
 
 3kHz https://www.youtube.com/watch?v=CAwpIiDQv5w
 
-![3k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ton_3_kHz.png)
+![3k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_3_kHz.png)
 
 7kHz https://www.youtube.com/watch?v=3_ciJKxe9VU
 
-![7k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ton_7_kHz.png)
+![7k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_7_kHz.png)
 
 1kHz + 3kHz + 7kHz ... todos habilitados ao mesmo tempo no notebook
 
