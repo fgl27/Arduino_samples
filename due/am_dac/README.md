@@ -112,5 +112,5 @@ O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um
 
 No video abaixo uma breve explicação do funcionamento e como é possível ver a musica fica com uma qualidade de áudio muito boa para AM.
 
-https://drive.google.com/file/d/1mpU2m4KYqXoMfls-M0ac0URaO17hGFsG/view?usp=sharing
+[Video demostrativos](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
 
