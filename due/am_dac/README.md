@@ -17,9 +17,16 @@ Neste projeto para modular o sinal foi usado esta mesma técnica mas a portadora
 
 ## Explicação detalhada funcionamento do processo lógico:
 
-Assim para gerar esta modulação no microcontrolador temos os seguintes passos [Configuração do Arduíno esta no arquivo am.ino](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/am_dac.ino)
+Assim para gerar esta modulação no microcontrolador temos os seguintes passos [Configuração do Arduíno esta no arquivo am_dac.ino](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/am_dac.ino)
 
-* fazer a explicação detalhada é bem simple seta o ADC, DAC e timer, lê o ADC a cada pulso par to timer e seta no DAC em pulsos impares zera o dac, fazendo assim a modulação
+* A função **setup()** inicializa todas funções;
+* A função **adc_setup()** Configura o ADC, habilita o ADC A0;
+* A função **dac_setup()** Configura o DAC, habilita o DAC1;
+* A função **tc_setup()** Configura o timer e os contadores, habilita o TC2 para ser usado como interrupção de leitura do ADC;
+* A função **ADC_Handler()** é a interrupção do ADC, nesta lê o ADC a cada pulso par to timer e seta o valor do ADC no DAC, em pulsos impares zera o valor do DAC sem ler o ADC, segundo Datasheet não é recomendado fazer leituras do ADC com frequências superiores a 1 MHz, pois o resultado é incerto da leitura;
+* Assim obtendo a modulação AM, ou seja simula o processo de multiplicar uma portadora de onda quadrada pela mensagem usando a logica do Arduíno Due;
+* A frequências suportadas de 100Hz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível de obter resultado.
+* Referencia da configuração usada consulte o [Datasheet SAM3X / SAM3A Series](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf), neste tem a descrição do que é cada registro, função e parâmetro usado.
 
 O resultado deste processo pode ser visto na pratica na imagem abaixo:
 
@@ -47,9 +54,7 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * O Arduíno então a cada pulso impar do timer zera o DAC, e pulsos pares lê o valor do ADC e seta este valor no DAC
 * E na porta **DAC1** temos a saída o sinal modulado AM
 
-# Resultado:
-
-Temos assim a imagem do circuito montado no Arduíno:
+# Imagens do circuito montado no Arduíno:
 
 ![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_desc.jpg?raw=true)
 
@@ -59,11 +64,7 @@ Temos assim a imagem do circuito montado no Arduíno:
 
 ![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_2.jpg?raw=true)
 
-Frequências suportadas:
-
-Varia de 1kHz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível.
-
-Resultados de alguns sinais de áudio:
+# Resultados de alguns sinais de áudio:
 
 O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na porta do DAC, oscilando a uma frequência de 700kHz.<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>

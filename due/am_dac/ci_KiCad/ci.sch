@@ -51,7 +51,7 @@ L Connector:AudioJack2 J?
 U 1 1 6053CCAD
 P 2600 3250
 F 0 "J?" V 2678 3120 50  0001 R CNN
-F 1 "Entrada do sinal de áudio" H 2350 3250 50  0000 R CNN
+F 1 "Entrada do sinal de áudio" H 2950 3050 50  0000 R CNN
 F 2 "" H 2600 3250 50  0001 C CNN
 F 3 "~" H 2600 3250 50  0001 C CNN
 	1    2600 3250
@@ -101,6 +101,12 @@ F 3 "" H 3450 2600 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3450 2850 3450 2600
+Wire Wire Line
+	3950 3150 4300 3150
+Wire Wire Line
+	3450 5450 3450 3600
+Wire Wire Line
+	3450 3250 4300 3250
 $Comp
 L arduino:Arduino_Due_Shield XA1
 U 1 1 60919093
@@ -112,15 +118,6 @@ F 3 "https://store.arduino.cc/arduino-due" H 6300 6450 60  0001 C CNN
 	1    5600 3700
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3950 3150 4300 3150
-Wire Wire Line
-	3450 3250 4300 3250
-Wire Wire Line
-	4350 5450 4300 5450
-Wire Wire Line
-	3450 5450 3450 3600
-Connection ~ 4300 5450
 Wire Wire Line
 	4300 5450 3450 5450
 $EndSCHEMATC

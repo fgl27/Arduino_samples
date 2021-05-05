@@ -101,19 +101,12 @@ F 3 "" H 3450 2600 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3450 2850 3450 2600
-$Comp
-L power:GNDREF GND
-U 1 1 60558CB3
-P 9100 4400
-F 0 "GND" H 9050 4200 50  0000 L CNN
-F 1 "GNDREF" H 9105 4227 50  0001 C CNN
-F 2 "" H 9100 4400 50  0001 C CNN
-F 3 "" H 9100 4400 50  0001 C CNN
-	1    9100 4400
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	9100 4400 9100 4200
+	3950 3150 4300 3150
+Wire Wire Line
+	3450 5450 3450 3600
+Wire Wire Line
+	3450 3250 4300 3250
 $Comp
 L arduino:Arduino_Due_Shield XA1
 U 1 1 60919093
@@ -125,15 +118,6 @@ F 3 "https://store.arduino.cc/arduino-due" H 6300 6450 60  0001 C CNN
 	1    5600 3700
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3950 3150 4300 3150
-Wire Wire Line
-	3450 3250 4300 3250
-Wire Wire Line
-	4350 5450 4300 5450
-Wire Wire Line
-	3450 5450 3450 3600
-Connection ~ 4300 5450
 Wire Wire Line
 	4300 5450 3450 5450
 $EndSCHEMATC
