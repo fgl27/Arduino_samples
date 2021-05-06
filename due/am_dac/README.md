@@ -55,9 +55,37 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 680kHz e um passa baixa frequência de corte 720kHz
 * E na saída do filtro a antena
 
-# Explicação do filtro:
+# Filtragem:
 
-Ao analisarmos o espectro FFT deste sinal vemos que a saída do DAC tem um componente DC muito alto, assim a necessidade de filtramos o sinal tanto para eliminar componentes de frequência indesejadas do sinal quanto para limitarmos a banda do sinal, abaixo temos duas imagens onde é possível ver os ecpectros FFT do DAC e da saída do filtro
+Para obter um sinal o mais próximo de um sinal AM comercial, é necessário aplicar um filtro na saída do DAC, o filtro tem algumas funções:
+
+* Eliminar a componente CC do sinal
+* Eliminar ou diminuir a contribuição de frequências além da fundamental (700 kHz) para o sinal
+* Limitar a largura de banda do sinal
+
+Como o objetivo é obter um sinal modulado em amplitude muito próximo do que é mostrado na imagem abaixo temos de fazer a filtragem.
+
+![am_mod](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/am_mod.png)
+
+Assim podemos ver o efeito que o filtro causa no sinal nas imagens abaixo, sem filtragem o sinal não é um AM puro, apos o filtro o sinal esta bem próximo de um AM modulado como o da imagem em exemplo acima.
+
+Sem filtragem:
+
+O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do DAC, oscilando a uma frequência de 700kHz.<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
+
+![out_antes_fitro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_antes.png)
+
+Com filtragem:
+
+O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
+
+![out_depois_filtro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_depois.png)
+
+# Analise do espectro FFT:
+
+Ao analisarmos o espectro FFT deste sinal vemos que a saída do DAC tem um componente DC muito alto, assim a necessidade de filtramos o sinal tanto para eliminar componentes de frequência indesejadas do sinal quanto para limitarmos a banda do sinal, abaixo temos duas imagens onde é possível ver os espectros FFT do DAC e da saída do filtro
 
 FFT DAC:<br>
 
