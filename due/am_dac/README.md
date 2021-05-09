@@ -53,7 +53,8 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * O Arduíno então a cada pulso impar do timer zera o DAC, e pulsos pares lê o valor do ADC e seta este valor no DAC
 * E na porta **DAC1** temos a saída o sinal modulado AM porem ainda não filtrado
 * Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz
-* E na saída do filtro a antena
+* E na saída do filtro conectado a um amplificador classe A, amplifica a potencia do sinal o suficiente para termos um sinal claro no radio, pois ao passar pelo filtro perdemos um pouco de potencia no sinal
+* A saída do amplificador conectado a antena
 
 # Filtragem:
 
@@ -116,15 +117,36 @@ FFT Filtro RLC
 
 Como é possível ver o sinal do filtro RC não é uma senoide, mas o sinal do RLC é muito próximo de uma senoide. Pelo espectro da FFT vemos que no filtro RLC a energia se concentra próxima a frequência de operação 700 kHz, já no filtro RC temos um pico em 600 kHz e o pico em 100 kHz é bem maior
 
+# Amplificador:
+
+Sem amplificador temos um leve ruido ao escutar o áudio em um radio (confira video demostrativo no final deste), assim foi adicionado este amplificador classe A, o mais simples amplificador possível, alimentado pelo próprio Arduíno e foi obtido sucesso em remover o ruido sem adicionar problemas, como outros ruídos e amplificar frequências indesejadas, o ganho de tensão ficou em 2,35 vezes.
+
+Abaixo a comparação dos sinais com e sem amplificação, no canal 0 em amarelo o sinal amplificado, no canal 1 em vermelho sem amplificação.
+
+Visão geral:
+
+![amp_geral](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_geral.png)
+
+Zoom:
+
+![amp_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_zoom.png)
+
 # Imagens do circuito montado no Arduíno:
 
-Com filtro RCL
+Com filtro RLC e amplificador
+
+![CI_DONE1](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_4.jpg?raw=true)
+
+![CI_DONE2](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_5.jpg?raw=true)
+
+
+Com filtro RLC sem amplificador
 
 ![CI_DONE1](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_2.jpg?raw=true)
 
 ![CI_DONE2](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_3.jpg?raw=true)
 
-Com filtro RC
+Com filtro RC sem amplificador
 
 ![CI_DONE3](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_0.jpg?raw=true)
 
@@ -155,9 +177,9 @@ O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio com um offset v
 
 No video abaixo uma breve explicação do funcionamento e como é possível ver a musica fica com uma qualidade de áudio muito boa para AM.
 
-[Video demostrativos filtro RLC](https://drive.google.com/file/d/1aLIixW98E_zOYSKfy_qHgwoAFog0OWmn/view?usp=sharing)
+[Video demostrativos filtro RLC com amplificação](https://drive.google.com/file/d/190R10johRux9wrGtr1tya3P-hCyCnH-G/view?usp=sharing)
 
-[Video demostrativos filtro RLC banda](https://drive.google.com/file/d/1b-R_9XrmK_6OIkTwCRy4NPLbOG2ZmaJt/view?usp=sharing)
+[Video demostrativos filtro RLC sem amplificação](https://drive.google.com/file/d/1aLIixW98E_zOYSKfy_qHgwoAFog0OWmn/view?usp=sharing)
 
-[Video demostrativos filtro RC](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
+[Video demostrativos filtro RC sem amplificação](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
 
