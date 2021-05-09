@@ -52,7 +52,7 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * Temos um timer configurado a 1.4 MHz
 * O Arduíno então a cada pulso impar do timer zera o DAC, e pulsos pares lê o valor do ADC e seta este valor no DAC
 * E na porta **DAC1** temos a saída o sinal modulado AM porem ainda não filtrado
-* Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 680kHz e um passa baixa frequência de corte 720kHz
+* Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz
 * E na saída do filtro a antena
 
 # Filtragem:
@@ -62,6 +62,7 @@ Para obter um sinal o mais próximo de um sinal AM comercial, é necessário apl
 * Eliminar a componente CC do sinal
 * Eliminar ou diminuir a contribuição de frequências além da fundamental (700 kHz) para o sinal
 * Limitar a largura de banda do sinal
+* Obter um sinal o mais próximo de uma AM comercial
 
 Como o objetivo é obter um sinal modulado em amplitude muito próximo do que é mostrado na imagem abaixo temos de fazer a filtragem.
 
@@ -72,57 +73,71 @@ Assim podemos ver o efeito que o filtro causa no sinal nas imagens abaixo, sem f
 Sem filtragem:
 
 O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do DAC, oscilando a uma frequência de 700kHz.<br>
-O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>
+FFT(0) do osciloscópio (expectro amarelo) é o espectro FFT do sinal do DAC.<br>
 
-![out_antes_fitro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_antes.png)
+![out_antes_fitro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/fft_1kz_dac.png)
 
 Com filtragem:
 
 O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
-O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>
+FFT(0) do osciloscópio (expectro amarelo) é o espectro FFT do sinal do filtro RLC.<br>
 
-![out_depois_filtro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_depois.png)
+![out_depois_filtro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/fft_1kz_filtro.png)
 
-# Analise do espectro FFT:
+Como é possível ver os picos no espectro de Fourier a frequancia 0, 200, 500 e 600 kHz são eliminados, o pico em 100 kHz diminui bastante, e a energia do sinal se concentra na frequência de operação 700 kHz.
 
-Ao analisarmos o espectro FFT deste sinal vemos que a saída do DAC tem um componente DC muito alto, assim a necessidade de filtramos o sinal tanto para eliminar componentes de frequência indesejadas do sinal quanto para limitarmos a banda do sinal, abaixo temos duas imagens onde é possível ver os espectros FFT do DAC e da saída do filtro
+# Escolha do filtro:
 
-FFT DAC:<br>
+Neste foi proposto e testado dois filtros passa banda, um RC e outro RLC, ambos funcionam porem o que demostra melhor resultado é o filtro RLC, pois este consegue entregar um sinal mais próximo de uma senoide quando comparado ao sinal do filtro RC, um sinal senoidal é o mais ideal, pois a potencia do sinal fica concentrada muito mais na frequência principal, assim evitando sinal fora da banda de operação e caso o sinal fosse amplificado evita amplificar sinais indesejados.<br>
 
-A frequência 0 (CC), 100, 500 e 600 kHz contribuem bastante para o sinal<br>
+Nas imagens abaixo temos uma visualização dos resultado de cada filtro
 
-![FFT_dac](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_dac.png)
+Zoom do sinal do DAC
 
-FFT Filtro:<br>
+![zoom_dac](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_dac.png) 
 
-A frequência 0 foi eliminada, a frequência de 500 kHz diminui bastante, a de 100 e 600 kHz nem tanto mas diminuem.<br>
+Zoom do DAC apos o Filtro RC
 
-![FFT_filtro](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro.png)
+![zoom_filtro_rc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rc.png) 
+
+Zoom do DAC apos o Filtro RLC
+
+![zoom_filtro_rlc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rlc.png) 
+
+FFT Filtro RC
+
+![FFT_filtro_rc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rc.png) 
+
+FFT Filtro RLC
+
+![FFT_filtro_rlc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc.png)
+
+Como é possível ver o sinal do filtro RC não é uma senoide, mas o sinal do RLC é muito próximo de uma senoide. Pelo espectro da FFT vemos que no filtro RLC a energia se concentra próxima a frequência de operação 700 kHz, já no filtro RC temos um pico em 600 kHz e o pico em 100 kHz é bem maior
 
 # Imagens do circuito montado no Arduíno:
 
-![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_0.jpg?raw=true)
+Com filtro RCL
 
-![CI_DONE](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_1.jpg?raw=true)
+![CI_DONE1](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_2.jpg?raw=true)
 
+![CI_DONE2](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_3.jpg?raw=true)
+
+Com filtro RC
+
+![CI_DONE3](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_0.jpg?raw=true)
+
+![CI_DONE4](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduino_montado_1.jpg?raw=true)
 
 # Resultados de alguns sinais de áudio:
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
-O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
+O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro RLC, oscilando a uma frequência de 700kHz (frequência de operação pode variar um pouco na imagem aberta, confira as imagens de zoom anterior para ver que esta oscilando a 700 kHz fixo).<br>
+O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio com um offset visto pela porta do ADC.<br>
 
 1kHz https://www.youtube.com/watch?v=3FBijeNg_Gs
 
 ![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz.png)
-
-1kHz zoom, aqui o DAC é o vermelho, amarelo saída do filtro
-
-![1k](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz_zoom.png)
-
-Nos demais segue...
-
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
-O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
 
 3kHz https://www.youtube.com/watch?v=CAwpIiDQv5w
 
