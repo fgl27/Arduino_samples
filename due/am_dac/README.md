@@ -31,7 +31,7 @@ O resultado deste processo pode ser visto na pratica na imagem abaixo:
 
 Temos [um sinal de áudio de um tom senoidal 1kHz](https://www.youtube.com/watch?v=3FBijeNg_Gs) na entrada do circuito.
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na porta do DAC, oscilando a uma frequência de 700kHz.<br>
+O canal 0 do osciloscópio (sinal amarelo) esta conectado na porta do DAC, oscilando a uma frequência de 700kHz.<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio original com um offset visto pela porta do ADC.<br>
 
 Como é possível ver o sinal modulado acompanha perfeitamente o sinal da mensagem.
@@ -72,7 +72,7 @@ Assim podemos ver o efeito que o filtro causa no sinal nas imagens abaixo, sem f
 
 Sem filtragem:
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do DAC, oscilando a uma frequência de 700kHz.<br>
+O canal 0 do osciloscópio (sinal amarelo) esta conectado na saída do DAC, oscilando a uma frequência de 700kHz.<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>
 FFT(0) do osciloscópio (expectro amarelo) é o espectro FFT do sinal do DAC.<br>
 
@@ -80,7 +80,7 @@ FFT(0) do osciloscópio (expectro amarelo) é o espectro FFT do sinal do DAC.<br
 
 Com filtragem:
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
+O canal 0 do osciloscópio (sinal amarelo) esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>
 FFT(0) do osciloscópio (expectro amarelo) é o espectro FFT do sinal do filtro RLC.<br>
 
@@ -132,7 +132,7 @@ Com filtro RC
 
 # Resultados de alguns sinais de áudio:
 
-O canal 0 do osciloscópio (sinal amarelo) sua amplitude é de 3.3V esta conectado na saída do filtro RLC, oscilando a uma frequência de 700kHz (frequência de operação pode variar um pouco na imagem aberta, confira as imagens de zoom anterior para ver que esta oscilando a 700 kHz fixo).<br>
+O canal 0 do osciloscópio (sinal amarelo) esta conectado na saída do filtro RLC, oscilando a uma frequência de 700kHz (frequência de operação pode variar um pouco nas imagens a seguir, confira as imagens de zoom anterior para ver que esta oscilando a 700 kHz fixo).<br>
 O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio com um offset visto pela porta do ADC.<br>
 
 1kHz https://www.youtube.com/watch?v=3FBijeNg_Gs
@@ -155,5 +155,9 @@ O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio com um offset v
 
 No video abaixo uma breve explicação do funcionamento e como é possível ver a musica fica com uma qualidade de áudio muito boa para AM.
 
-[Video demostrativos](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
+[Video demostrativos filtro RLC](https://drive.google.com/file/d/1aLIixW98E_zOYSKfy_qHgwoAFog0OWmn/view?usp=sharing)
+
+[Video demostrativos filtro RLC banda](https://drive.google.com/file/d/1b-R_9XrmK_6OIkTwCRy4NPLbOG2ZmaJt/view?usp=sharing)
+
+[Video demostrativos filtro RC](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
 
