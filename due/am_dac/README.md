@@ -131,7 +131,17 @@ Zoom:
 
 ![amp_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_zoom.png)
 
-# Imagens do circuito montado no Arduíno:
+# Imagens 3d circuito e PCB Arduíno:
+
+[PCB veja este pdf](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/pcb.pdf)
+
+![ci_3d](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d.png)
+
+![ci_3d_2](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d_3.png)
+
+![ci_3d_2](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d_2.png)
+
+# Imagens do circuito montado para test no Arduíno:
 
 Com filtro RLC e amplificador
 
