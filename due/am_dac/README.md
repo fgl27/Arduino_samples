@@ -131,6 +131,10 @@ Zoom:
 
 ![amp_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_zoom.png)
 
+FFT saída do filtro:
+
+![amp_zoom](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc_amp.png)
+
 # Imagens 3d circuito e PCB Arduíno:
 
 [PCB veja este pdf](https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/pcb.pdf)
