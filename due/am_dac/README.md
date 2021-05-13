@@ -191,9 +191,9 @@ O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio com um offset v
 
 No video abaixo uma breve explicação do funcionamento e como é possível ver a musica fica com uma qualidade de áudio muito boa para AM.
 
-[Video demostrativos filtro RLC com amplificação](https://drive.google.com/file/d/190R10johRux9wrGtr1tya3P-hCyCnH-G/view?usp=sharing)
+[Video demostrativos filtro RLC com amplificação](https://youtu.be/n_dgm5joqQQ)
 
-[Video demostrativos filtro RLC sem amplificação](https://drive.google.com/file/d/1aLIixW98E_zOYSKfy_qHgwoAFog0OWmn/view?usp=sharing)
+[Video demostrativos filtro RLC sem amplificação](https://youtu.be/qsMYSg_q5ks)
 
-[Video demostrativos filtro RC sem amplificação](https://drive.google.com/file/d/1iUHsBG3t269ETMHgweM_uz2gOnA2Elhb/view?usp=sharing)
+[Video demostrativos filtro RC sem amplificação](https://youtu.be/yYcabqJUBEA)
 
