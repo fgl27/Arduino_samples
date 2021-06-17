@@ -121,8 +121,11 @@ desenvolvimento
 
 Apresentação 
 
+
 <p dir="ltr" style="text-align:left;"></p>
 <p>Como tudo funcionando, apresentamos algumas formas de onda e um video demostrativo do funcionamento.</p>
+<h2><strong>Apresentação:</strong></h2>
+<p><br></p>
 <h3><strong><span style="font-size:1.25rem;">Resultados de alguns sinais de áudio:</span><br></strong></h3>
 <p>Como é possível ver o sinal modulado acompanha perfeitamente o sinal da mensagem.</p>
 <p>O canal 0 do osciloscópio (sinal amarelo) está conectado na saída do filtro RLC, oscilando a uma frequência de 700kHz (frequência de operação pode variar um pouco nas imagens a seguir, isto é devido o osciloscópio por termos sinais com frequências tão
@@ -136,7 +139,6 @@ Apresentação
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_7_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_7_kHz.png" alt="7k" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>1kHz + 3kHz + 7kHz ... todos habilitados ao mesmo tempo no notebook</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/soma_tom_1_3_7_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/soma_tom_1_3_7_kHz.png" alt="soma" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-
 <h3><span style="font-size:1.25rem;"><strong>Video demonstrativos do projeto funcionando num rádio</strong></span><br></h3>
 <p>No video abaixo uma breve explicação do funcionamento e como é possível ver a música fica com uma qualidade de áudio muito boa para AM.</p>
 <p><strong>Video demostrativos filtro RLC com amplificação</strong><br></p>
@@ -148,3 +150,5 @@ Apresentação
 <p><strong>Video demonstrativos filtro RC sem amplificação<br></strong></p>
 <p><span style="font-size:.9375rem;">Com este filtro não atenuou tanto o sinal assim não foi adicionado um amplificador, após termos mudado para um filtro RLC precisou, este seguinte é apenas demonstrativo do nosso processo, comessamos com um filtro mais simple e terminamos usando um mais adequado.</span></p>
 <p><span style="font-size:.9375rem;">https://www.youtube.com/watch?v=yYcabqJUBEA</span><br></p>
+
+
