@@ -75,9 +75,13 @@ O funcionamento do circuito ao redor do Arduíno é muito simples.
 * Temos um timer configurado a 1.4 MHz
 * O Arduíno então a cada pulso impar do timer zera a saída do DAC, e pulsos pares lê o valor do ADC e seta este valor na saída do DAC
 * E na porta **DAC1** temos a saída o sinal modulado AM porem ainda não filtrado
-* Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz, assim uma banda de 16kHz, o ajuste da banda é feito apenas mudando o valor da resistência do trimpot utilizado, neste caso foi usada um trimpot de ate 100 Ω ajustado para 9 Ω
+* Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz, ou seja, com uma banda de 16kHz, o ajuste da banda é feito apenas mudando o valor da resistência do trimpot utilizado, neste caso foi usada um trimpot de ate 100 Ω ajustado para 9 Ω
+* O valor nominal e medido do indutor foi de 90µH, o valor nominal do capacitor é 561 pF e medido 572 pF, o que na prática desloca o filtro 1.5kHz para cima, ou seja, as frequências de corte ficam 693.5 a 709.5 kHz usando um resistor de 9 Ω, o que não afeta o funcionamento prático
 * E na saída do filtro conectado a um amplificador classe A, simples apenas com transistor e resistores, amplifica a potencia do sinal o suficiente para termos um sinal de áudio claro sem ruídos audíveis no radio.
-* A saída do amplificador conectado a antena, que é um simples fio de alguns metros 
+* A saída do amplificador conectado a antena, que é um simples fio de alguns metros
+
+![calc_filtro_rlc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/calc_filtro_rlc.png)
+
 
 ### Explicação detalhada funcionamento do processo lógico:
 
@@ -92,8 +96,6 @@ Assim para gerar esta modulação no microcontrolador temos os seguintes passos 
 * As frequências de operação suportadas do Arduíno estão entre 100Hz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível de obter resultado.
 * Como o radio utilizado só tem definição de seleção de frequência de 10 em 10kHz, foi escolhido um valor de timer que entregasse uma frequência terminada em zero, assim, a frequência escolhida foi de 700kHz pois é fica dentro da faixa AM, não é utilizada na cidade e o arduino consegue gerar com precisão.
 * Referencia da configuração usada consulte o [Datasheet SAM3X / SAM3A Series](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf), neste tem uma descrição completa do que é cada registrador, função e parâmetro que foi neste usado com detalhes.
-
-![calc_filtro_rlc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/calc_filtro_rlc.png)
 
 ### Filtragem:
 
