@@ -2,10 +2,10 @@
 /*                                                                                                  */
 /*       Transmissor AM usando Arduino DUE, um ADC, DAC e Timer                                     */
 /*       É gerada uma portadora de onda quadrada usando o timer TIOA2 operando em 1.4MHz            */
-/*       Em pulsos impares do timer é zerada o DAC, em pulsos pares é lido                          */
+/*       Em pulsos impares do timer é zerada o DAC                                                  */
 /*       Em pulsos pares é lido o ADC e setado este valor no DAC                                    */
 /*       Assim as conversões do ADC são a uma frequência de 700 kHz                                 */
-/*       E o DAC é modificado a uma frequanci de 1.4 MHz                                            */
+/*       E o DAC é modificado a uma frequência de 1.4 MHz                                            */
 /*                                                                                                  */
 /****************************************************************************************************/
 
