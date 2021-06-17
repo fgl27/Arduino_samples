@@ -88,10 +88,12 @@ Assim para gerar esta modulação no microcontrolador temos os seguintes passos 
 * A função **dac_setup()** Configura o DAC, habilita o **DAC1**;
 * A função **tc_setup()** Configura o timer e os contadores, habilita o **TC2** para ser usado como interrupção de leitura do ADC;
 * A função **ADC_Handler()** é a interrupção do ADC, nesta lê o ADC a cada pulso par to timer e seta o valor do ADC no DAC, em pulsos impares zera o valor do DAC sem ler o ADC, segundo Datasheet não é recomendado fazer leituras do ADC com frequências superiores a 1 MHz, pois o resultado é incerto da leitura;
-* Assim obtendo a modulação AM, ou seja simula o processo de multiplicar uma portadora de onda quadrada pela mensagem usando a logica do Arduíno Due;
-* A frequências suportadas de 100Hz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível de obter resultado.
+* Assim obtendo a modulação AM, ou seja simula o processo de multiplicar uma portadora de onda quadrada pela mensagem usando a lógica do Arduíno Due;
+* As frequências de operação suportadas do Arduíno estão entre 100Hz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível de obter resultado.
 * Como o radio utilizado só tem definição de seleção de frequência de 10 em 10kHz, foi escolhido um valor de timer que entregasse uma frequência terminada em zero, assim, a frequência escolhida foi de 700kHz pois é fica dentro da faixa AM, não é utilizada na cidade e o arduino consegue gerar com precisão.
 * Referencia da configuração usada consulte o [Datasheet SAM3X / SAM3A Series](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf), neste tem uma descrição completa do que é cada registrador, função e parâmetro que foi neste usado com detalhes.
+
+![calc_filtro_rlc](https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/calc_filtro_rlc.png)
 
 ### Filtragem:
 
