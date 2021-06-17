@@ -1,20 +1,22 @@
 introdução
 
+<p dir="ltr" style="text-align:left;"></p>
 <h2>Introdução:</h2>
 <p>Para desenvolver este projeto escolhemos usar um processo de modulação digital chaveada usando Arduíno. Este processo é exemplificado no diagrama abaixo.</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/mod_chave.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/mod_chave.png" alt="mod_chave" width="1200" height="675" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>Neste usamos um Arduíno DUE que tem algumas qualidades de um FPGA mas é considerado apenas um microcontrolador.</p>
+<p>Neste usamos um <a target="_blank" href="https://store.arduino.cc/usa/due" rel="noreferrer noopener">Arduíno DUE</a> que tem algumas qualidades de um FPGA, como boa velocidade de processamento com um CPU ARM 32-bit com um clock de 84 MHz, ADC com boa
+    resolução 12 bits e alta taxa de amostragem maxima recomendavel de 1MHz e&nbsp; saídas DAC também com boa resolução 12 bits e taxa de atualização superior a 1,5MHz,&nbsp; mas é considerado apenas um microcontrolador.</p>
 <p><a target="_blank" href="https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/arduinodue.jpg?raw=true" rel="noreferrer noopener"><img src="https://github.com/fgl27/Arduino_samples/raw/master/due/am_dac/arduinodue.jpg?raw=true" alt="arduinodue" width="1200" height="1200" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>Este transmissor AM digital funciona como qualquer outro transmissor AM comercial digital</p>
 <p>Em uma modulação AM temos a imagem abaixo, o sinal modulado varia sua amplitude em relação ao sinal modulador ou sinal de áudio a modular.</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/am_mod.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/am_mod.png" alt="am_mod" width="609" height="357" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>Neste projeto para modular o sinal foi usado esta mesma técnica mas a portadora é uma onda quadrada, assim o resultado do sinal modulado é o visto na imagem abaixo, sendo o sinal de mensagem uma onda senoidal que oscila entre 0 e um valor positivo de
-    tensão</p>
+<p>Neste projeto para modular o sinal foi usado esta mesma técnica mas a portadora é uma onda quadrada, assim o resultado do sinal modulado é mais próximo do sinal visto na imagem abaixo, sendo o sinal de mensagem uma onda senoidal que oscila entre 0 e um
+    valor positivo de tensão.</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/modulado.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/modulado.png" alt="am_mod" width="411" height="264" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>Como o sinal gerado na saída do Arduíno não é um sinal senoide, ou seja, não é um sinal AM comercial, é necessário adicionar um filtro e no nosso caso um amplificador, pois o sinal após o filtragem ficou com baixa potência, para que tenhamos um sinal
+<p>Como o sinal gerado na saída do Arduíno não é um sinal senoidal, ou seja, não é um sinal AM comercial, é necessário adicionar um filtro e no nosso caso um amplificador, pois o sinal após o filtragem ficou com baixa potência, para que tenhamos um sinal
     adequado para transmissão.</p>
 <p>Assim no desenvolvimento vamos demonstrar como usamos a técnica de modulação aprendidas neste semestre para fazer este transmissor funcionar de forma adequada como um transmissor AM comercial.</p>Obs.: Como&nbsp; começamos a fazer o trabalho a algumas
-semanas já temos tudo quase pronto por isso iremos incluir a seguir tudo que já fizemos.<br>
+semanas já temos tudo quase pronto por isso iremos incluir nas paginas a seguir tudo que já fizemos.<br>
 
 desenvolvimento
 
@@ -28,9 +30,9 @@ desenvolvimento
     <li>Após introduzir o filtro foi percebido que a potência do sinal não estava adequada, o que gerava ruídos sonoro notável no rádio, assim foi adicionado um simples amplificador;</li>
     <li>Assim com tudo funcionando foi proposto um PCB com todos componentes necessário para funcionamento deste, com um layout que encaixe exatamente sobre as portas usadas do Arduíno.</li>
 </ul>
-<p>Abaixo temos cada um destes passos em detalhes.</p>
+<p>Abaixo com mais detalhes cada processo usado no desenvolvimento.</p>
 <p></p>
-<h3><span><strong>Explicação detalhada funcionamento do circuito:</strong></span></h3>
+<h3>Explicação detalhada funcionamento do circuito:</h3>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci.png" alt="CI" width="1200" height="766" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>O funcionamento do circuito ao redor do Arduíno é muito simples.</p>
 <ul>
@@ -38,18 +40,22 @@ desenvolvimento
     <li>O capacitor de 10uF funciona apenas como um filtro bloqueando a corrente CC do sinal deixando passar apenas o sinal de áudio analógico vindo da fonte de áudio.</li>
     <li>Os dois resistores de 10kΩ formão um divisor de tensão, divide a tensão referencia do ADC 3,3V pela metade</li>
     <li>O sinal de áudio esta oscilando sobre 0V, ou seja, para mais e para menos de 0V com um pico de amplitude de 0,5V (Ajustado através do volume da fonte de audio), quando este é conectado ao capacitor duas coisas ocorrem, a parte CC do sinal é filtrada
-        e o sinal é elevado em tensão (um offset para mais) para agora oscilar abaixo e acima de&nbsp;<strong>VREF 3.3V/2 = 1,65V</strong>, assim temos o resultado do sinal visto na imagem do osciloscópio</li>
+        e o sinal é elevado em tensão (um offset positivo) para agora oscilar abaixo e acima de&nbsp;<strong>VREF 3.3V/2 = 1,65V</strong>, assim temos o resultado do sinal visto na imagem do osciloscópio</li>
     <li>Assim este sinal filtrado e com um offset é conectado na porta&nbsp;<strong>A0</strong>&nbsp;dos ADC</li>
     <li>Temos um timer configurado a 1.4 MHz</li>
     <li>O Arduíno então a cada pulso impar do timer zera a saída do DAC, e pulsos pares lê o valor do ADC e seta este valor na saída do DAC</li>
     <li>E na porta&nbsp;<strong>DAC1</strong>&nbsp;temos a saída o sinal modulado AM porém ainda não filtrado</li>
-    <li>Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz, assim uma banda de 16kHz, o ajuste da banda é feito apenas mudando o valor da resistência
+    <li>Assim temos um filtro passa banda conectado no DAC, formada por um filtro passa alta com frequência de corte 692kHz e um passa baixa frequência de corte 708kHz, ou seja, com uma banda de 16kHz, o ajuste da banda é feito apenas mudando o valor da resistência
         do trimpot utilizado, neste caso foi usada um trimpot de ate 100 Ω ajustado para 9 Ω</li>
-    <li>E na saída do filtro conectado a um amplificador classe A, simples apenas com transistor e resistores, amplifica a potencia do sinal o suficiente para termos um sinal de áudio claro sem ruídos audíveis no radio.</li>
+    <li>O valor nominal e medido do indutor foi de 90µH, o valor nominal do capacitor é 561 pF e medido 572 pF, o que na prática desloca o filtro 1,5kHz para cima, ou seja, as frequências de corte ficam 693,5 a 709,5 kHz usando um resistor de 9 Ω, o que não
+        afeta o funcionamento prático</li>
+    <li>E na saída do filtro conectado a um amplificador classe A, simples apenas com transistor e resistores, amplifica a potencia do sinal o suficiente para termos um sinal de áudio claro sem ruídos audíveis no rádio.</li>
     <li>A saída do amplificador conectado a antena, que é um simples fio de alguns metros</li>
 </ul>
-<h3><span><strong>Explicação detalhada funcionamento do processo lógico:</strong></span></h3>
-<p><span style="font-size:.9375rem;">Assim para gerar esta modulação no microcontrolador temos os seguintes passos&nbsp;</span><a href="https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/am_dac.ino" style="background-color:rgb(255,255,255);font-size:.9375rem;">Configuração do Arduíno esta no arquivo am_dac.ino</a><br></p>
+<p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/calc_filtro_rlc.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/calc_filtro_rlc.png" alt="calc_filtro_rlc" width="1000" height="473" class="img-fluid atto_image_button_text-bottom"></a><br></p>
+<h3>Explicação detalhada funcionamento do processo lógico:</h3>
+<p><span style="font-size:.9375rem;">Para gerar esta modulação no microcontrolador temos os seguintes passos&nbsp;</span><a target="_blank" href="https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/am_dac.ino" style="background-color:rgb(255,255,255);font-size:.9375rem;"
+        rel="noreferrer noopener">Configuração do Arduíno esta no arquivo am_dac.ino</a><br></p>
 <ul>
     <li>A função&nbsp;<strong>setup()</strong>&nbsp;inicializa todas funções;</li>
     <li>A função&nbsp;<strong>adc_setup()</strong>&nbsp;Configura o ADC, habilita o ADC&nbsp;<strong>A0</strong>;</li>
@@ -59,12 +65,12 @@ desenvolvimento
         do ADC com frequências superiores a 1 MHz, pois o resultado é incerto da leitura;</li>
     <li>Assim obtendo a modulação AM, ou seja simula o processo de multiplicar uma portadora de onda quadrada pela mensagem usando a lógica do Arduíno Due;</li>
     <li>As frequências de operação suportadas do Arduíno estão entre 100Hz ate 807.44kHz, devido tanto o ADC quando o DAC terem limites da frequência de leitura e escrita, esta foi a máxima frequência possível de obter resultado.</li>
-    <li>Como o radio utilizado só tem definição de seleção de frequência de 10 em 10kHz, foi escolhido um valor de timer que entregasse uma frequência terminada em zero, assim, a frequência escolhida foi de 700kHz pois é fica dentro da faixa AM, não é utilizada
+    <li>Como o rádio utilizado só tem definição de seleção de frequência de 10 em 10kHz, foi escolhido um valor de timer que entregasse uma frequência terminada em zero, assim, a frequência escolhida foi de 700kHz pois é fica dentro da faixa AM, não é utilizada
         na cidade e o arduino consegue gerar com precisão.</li>
-    <li>Referencia da configuração usada consulte o&nbsp;<a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf">Datasheet SAM3X / SAM3A Series</a>, neste tem uma descrição completa
-        do que é cada registrador, função e parâmetro que foi neste usado com detalhes.</li>
+    <li>Referencia da configuração usada consulte o&nbsp;<a target="_blank" href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf" rel="noreferrer noopener">Datasheet SAM3X / SAM3A Series</a>,
+        neste tem descrições completa de cada registrador, função e parâmetro usado neste.</li>
 </ul>
-<h3><span style="font-size:1.25rem;"><strong>Filtragem:</strong></span><br></h3>
+<h3>Filtragem:</h3>
 <p>Como o objetivo é obter um sinal modulado em amplitude muito próximo do que é mostrado na imagem abaixo temos de fazer a filtragem.</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/am_mod.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/am_mod.png" alt="am_mod" width="600" height="352" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>O filtro tem algumas funções:</p>
@@ -75,45 +81,49 @@ desenvolvimento
     <li>Obter um sinal senoidal o mais próximo de uma AM comercial</li>
 </ul>
 <p>Assim podemos ver o efeito que o filtro causa no sinal nas imagens abaixo, sem filtragem o sinal não é um AM puro, após o filtro o sinal está bem próximo de um AM comercial.</p>
-<h4><strong style="font-size:1.1rem;">Sinal sem filtragem:</strong><br></h4>
+<h4>Sinal sem filtragem:</h4>
 <p>O canal 0 do osciloscópio (sinal amarelo) esta conectado na saída do DAC, oscilando a uma frequência de 700kHz.<br>O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>FFT(0)
     do osciloscópio (expectro amarelo) é o espectro FFT do sinal do DAC.<br></p>
 <p><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/fft_1kz_dac.png" alt="out_antes_fitro" width="1200" height="1042" class="img-fluid atto_image_button_text-bottom"><br></p>
-<h4><strong style="font-size:1.1rem;">Sinal com filtragem:</strong><br></h4>
+<h4>Sinal com filtragem:</h4>
 <p>O canal 0 do osciloscópio (sinal amarelo) esta conectado na saída do filtro, oscilando a uma frequência de 700kHz.<br>O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio (um tom senoidal 1kHz) com um offset, sinal visto pela porta do ADC.<br>FFT(0)
     do osciloscópio (expectro amarelo) é o espectro FFT do sinal do filtro RLC.<br></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/fft_1kz_filtro.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/fft_1kz_filtro.png" alt="out_depois_filtro" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>Como é possível ver os picos no espectro de Fourier a frequência 0, 200, 500 e 600 kHz são eliminados, o pico em 100 kHz diminui bastante, e a energia do sinal se concentra na frequência de operação 700 kHz.</p>
 <p>A principio este pico de frequencia em 100 kHz parece ser um erro introduzido pelo osciloscópio, pois esta as vezes some como é possível ver na imagem da FFT do sinal amplificado.</p>
-<h3><span style="font-size:1.25rem;"><strong>Escolha do filtro:</strong></span><br></h3>
+<h3>Escolha do filtro:</h3>
 <p>Neste foi proposto e testado dois filtros passa faixa, um RC e outro RLC, ambos funcionam porém o que demonstra melhor resultado é o filtro RLC, pois este consegue entregar um sinal mais próximo de uma senóide quando comparado ao sinal do filtro RC, um
     sinal senoidal é o mais ideal, pois a potência do sinal fica concentrada muito mais na frequência principal da portadora, assim evitando sinal fora da banda de operação e caso o sinal fosse amplificado evita amplificar sinais indesejados.<br></p>
 <p>Nas imagens abaixo temos uma visualização dos resultado de cada filtro</p>
-<h4><strong style="font-size:1.1rem;">Zoom do sinal do DAC:</strong><br></h4>
+<h4>Zoom do sinal do DAC:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_dac.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_dac.png" alt="zoom_dac" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p><strong style="font-size:1.1rem;">Zoom do DAC apos o Filtro RC</strong></p>
+<h4>Zoom do DAC apos o Filtro RC:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rc.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rc.png" alt="zoom_filtro_rc" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h4><span style="font-size:1.1rem;"><strong>Zoom do DAC apos o Filtro RLC</strong></span><br></h4>
+<h4>Zoom do DAC apos o Filtro RLC:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rlc.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/zoom_filtro_rlc.png" alt="zoom_filtro_rlc" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h4><strong style="font-size:1.1rem;">FFT Filtro RC</strong><br></h4>
+<h4>FFT Filtro RC</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rc.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rc.png" alt="FFT_filtro_rc" width="1200" height="275" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h4><span style="font-size:1.1rem;"><strong>FFT Filtro RLC</strong></span><br></h4>
+<h4>FFT Filtro RLC:</h4>
+
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc.png" alt="FFT_filtro_rlc" width="1200" height="232" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p>Como é possível ver o sinal do filtro RC não é uma senoide, mas o sinal do RLC é muito próximo de uma senóide. Pelo espectro da FFT vemos que no filtro RLC a energia se concentra próxima a frequência de operação 700 kHz, já no filtro RC temos um pico
     em 600 kHz e o pico em 100 kHz é bem maior.</p>
-<h3><span style="font-size:1.25rem;"><strong>Amplificador:</strong></span><br></h3>
-<p>Sem amplificador temos um leve ruído ao escutar o áudio em um radio (confira video demostrativo na pagina de <a href="https://e-aula.ufpel.edu.br/mod/wiki/view.php?pageid=574">Apresentação</a>), assim foi adicionado este amplificador classe A, o mais
-    simples amplificador possível, alimentado pelo próprio Arduíno e foi obtido sucesso em remover o ruído sem adicionar problemas, como outros ruídos e amplificar frequências indesejadas, o ganho de tensão ficou em 2,35 vezes.</p>
+<h3>Amplificador:</h3>
+<p>Sem amplificador temos um leve ruído ao escutar o áudio em um radio (confira video demostrativo na pagina de <a target="_blank" href="https://e-aula.ufpel.edu.br/mod/wiki/view.php?pageid=574" rel="noreferrer noopener">Apresentação</a>), assim foi adicionado
+    este amplificador classe A, o mais simples amplificador possível, alimentado pelo próprio Arduíno e foi obtido sucesso em remover o ruído sem adicionar problemas, como outros ruídos e amplificar frequências indesejadas, o ganho de tensão ficou em
+    2,35 vezes.</p>
 <p>Abaixo a comparação dos sinais com e sem amplificação, no canal 0 em amarelo o sinal amplificado, no canal 1 em vermelho sem amplificação.</p>
-<h4><strong style="font-size:1.1rem;">Sinal visão geral:</strong><br></h4>
+<h4>Sinal amplificado visão geral:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_geral.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_geral.png" alt="amp_geral" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h4><span style="font-size:1.1rem;"><strong>Sinal com Zoom:</strong></span><br></h4>
+<h4>Sinal amplificado com Zoom:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_zoom.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/amp_zoom.png" alt="amp_zoom" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h4><span style="font-size:1.1rem;"><strong>FFT saída do filtro:</strong></span><br></h4>
+<h4>FFT do sinal amplificado:</h4>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc_amp.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/FFT_filtro_rlc_amp.png" alt="amp_zoom" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>Assim como é possível ver nesta o pico de 100kHz sumiu na FT, assim, é possível ver neste sinal amplificado que a potencia se encontra quase toda sobre a frequencia de operação 700kHz da portadora.</p>
-<p><span style="font-size:1.25rem;"><strong>Imagens 3d circuito e PCB Arduíno:</strong></span></p>
-<p><a href="https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/pcb.pdf">PCB veja este pdf</a></p>
+<p>Assim, é possível ver neste sinal amplificado que a potencia se encontra quase toda sobre a frequencia de operação 700kHz da portadora.<br></p>
+<p>Como é possível ver nesta última imagem o pico de 100kHz sumiu na FFT, o que indica que esta talvez seja um erro introduzido pelo osciloscópio que é um modelo USB, o computador, os cabos usados ou até mesmo o software do osciloscópio.</p>
+<h3>Imagens 3d circuito e PCB proposto:</h3>
+<p><span style="font-size:.9375rem;">PCB proposto com todos componentes necessário para funcionamento deste, com um layout que encaixe exatamente sobre as portas usadas do Arduíno.</span></p>
+<p><a target="_blank" href="https://github.com/fgl27/Arduino_samples/blob/master/due/am_dac/pcb.pdf" rel="noreferrer noopener">PCB veja este pdf</a></p>
 <p><br><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d_2.png" alt="ci_3d_2" width="1104" height="793" class="img-fluid atto_image_button_text-bottom"><br><br></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d.png" alt="ci_3d" width="1104" height="760" class="img-fluid atto_image_button_text-bottom"></a></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d_3.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/ci_3d_3.png" alt="ci_3d_2" width="1104" height="899" class="img-fluid atto_image_button_text-bottom"></a></p><br>
@@ -121,25 +131,26 @@ desenvolvimento
 
 Apresentação 
 
-
 <p dir="ltr" style="text-align:left;"></p>
-<p>Como tudo funcionando, apresentamos algumas formas de onda e um video demostrativo do funcionamento.</p>
-<h2><strong>Apresentação:</strong></h2>
-<p><br></p>
-<h3><strong><span style="font-size:1.25rem;">Resultados de alguns sinais de áudio:</span><br></strong></h3>
+<h2>Apresentação:</h2>
+<p>Como tudo funcionando, apresentamos algumas formas de onda e um vídeo demonstrativo do funcionamento.<br></p>
+<h3>Resultados de alguns sinais de áudio:</h3>
 <p>Como é possível ver o sinal modulado acompanha perfeitamente o sinal da mensagem.</p>
 <p>O canal 0 do osciloscópio (sinal amarelo) está conectado na saída do filtro RLC, oscilando a uma frequência de 700kHz (frequência de operação pode variar um pouco nas imagens a seguir, isto é devido o osciloscópio por termos sinais com frequências tão
-    longe, acaba calculando um pouco fora, confira as imagens de zoom disponíveis no <a href="https://e-aula.ufpel.edu.br/mod/wiki/view.php?pageid=573#toc-14">desenvolvimento</a> para ver que a portadora está oscilando a 700 kHz fixo).<br>O canal 1 do
-    osciloscópio (sinal vermelho) é o sinal de áudio a mensagem, com um offset visto pela porta do ADC.<br></p>
-<p>1kHz&nbsp;<a href="https://www.youtube.com/watch?v=3FBijeNg_Gs">https://www.youtube.com/watch?v=3FBijeNg_Gs</a></p>
+    longe, acaba calculando um pouco fora, confira as imagens de zoom disponíveis no <a href="https://e-aula.ufpel.edu.br/mod/wiki/view.php?pageid=573#toc-14" target="_blank" rel="noreferrer noopener">desenvolvimento</a> para ver que a portadora está
+    oscilando a 700 kHz fixo).<br>O canal 1 do osciloscópio (sinal vermelho) é o sinal de áudio a mensagem, com um offset visto pela porta do ADC.<br></p>
+<p>Tom de teste 1kHz youtube&nbsp;</p>
+<p><a href="https://www.youtube.com/watch?v=3FBijeNg_Gs">https://www.youtube.com/watch?v=3FBijeNg_Gs</a></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_1_kHz.png" alt="1k" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>3kHz&nbsp;<a href="https://www.youtube.com/watch?v=CAwpIiDQv5w">https://www.youtube.com/watch?v=CAwpIiDQv5w</a></p>
+<p>Tom de teste 3kHz youtube&nbsp;</p>
+<p>&nbsp;<a href="https://www.youtube.com/watch?v=CAwpIiDQv5w">https://www.youtube.com/watch?v=CAwpIiDQv5w</a></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_3_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_3_kHz.png" alt="3k" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>7kHz&nbsp;<a href="https://www.youtube.com/watch?v=3_ciJKxe9VU">https://www.youtube.com/watch?v=3_ciJKxe9VU</a></p>
+<p>Tom de teste 7kHz youtube&nbsp;</p>
+<p>&nbsp;<a href="https://www.youtube.com/watch?v=3_ciJKxe9VU">https://www.youtube.com/watch?v=3_ciJKxe9VU</a></p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_7_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/tone_7_kHz.png" alt="7k" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<p>1kHz + 3kHz + 7kHz ... todos habilitados ao mesmo tempo no notebook</p>
+<p>1kHz + 3kHz + 7kHz ... todos habilitados ao mesmo tempo:</p>
 <p><a target="_blank" href="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/soma_tom_1_3_7_kHz.png" rel="noreferrer noopener"><img src="https://raw.githubusercontent.com/fgl27/Arduino_samples/master/due/am_dac/soma_tom_1_3_7_kHz.png" alt="soma" width="1200" height="651" class="img-fluid atto_image_button_text-bottom"></a></p>
-<h3><span style="font-size:1.25rem;"><strong>Video demonstrativos do projeto funcionando num rádio</strong></span><br></h3>
+<h3>Video demonstrativos do projeto funcionando num rádio</h3>
 <p>No video abaixo uma breve explicação do funcionamento e como é possível ver a música fica com uma qualidade de áudio muito boa para AM.</p>
 <p><strong>Video demostrativos filtro RLC com amplificação</strong><br></p>
 <p><span style="font-size:.9375rem;">https://www.youtube.com/watch?v=n_dgm5joqQQ</span><br></p>
@@ -149,6 +160,4 @@ Apresentação
 <p><span style="font-size:.9375rem;">https://www.youtube.com/watch?v=qsMYSg_q5ks</span><br></p>
 <p><strong>Video demonstrativos filtro RC sem amplificação<br></strong></p>
 <p><span style="font-size:.9375rem;">Com este filtro não atenuou tanto o sinal assim não foi adicionado um amplificador, após termos mudado para um filtro RLC precisou, este seguinte é apenas demonstrativo do nosso processo, comessamos com um filtro mais simple e terminamos usando um mais adequado.</span></p>
-<p><span style="font-size:.9375rem;">https://www.youtube.com/watch?v=yYcabqJUBEA</span><br></p>
-
-
+https://www.youtube.com/watch?v=yYcabqJUBEA
